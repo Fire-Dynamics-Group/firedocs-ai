@@ -30,12 +30,12 @@ export const queryPineconeVectorStoreAndQueryLLM = async (
     const prompt = new PromptTemplate({
       inputVariables: ["context", "question"],
       template: `
-      The context if from the kneesovertoesguy. You are giving advice to a client using his teachings. 
-      Use only the information in the context to answer the question.
+      The person asking the question is a Fire Safety Engineer. Collect the info needed from the Engineer to answer the following question:
       Context: {context}
       Question: {question}
-      If you cannot find the answer from the info in the context, DO NOT MAKE UP AN ANSWER. 
-      However, in this case, you may answer the closest related question possible using the context, but INCLUDE THE RELATED QUESTION IN THE ANSWER.
+      If the answer is not in the context, DO NOT MAKE UP AN ANSWER.
+      However, in this case, if there are any relevant answers you can find, please state these.
+      You can ask the Engineer for more information and point them in the right direction of particular calculations and the information missing for you to perform them. 
   `,
     });
     // Extract and concatenate page content from matched documents
@@ -55,7 +55,7 @@ export const queryPineconeVectorStoreAndQueryLLM = async (
 
     console.log(`Answer: ${result}`);
 
-    return result
+    return [result, concatenatedPageContent]
   } else {
 
     console.log('Since there are no matches, GPT-3 will not be queried.');

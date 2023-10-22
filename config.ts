@@ -1,2 +1,2 @@
-export const indexName = 'kot-youtube'
+export const indexName = 'fire-textbook'
 export const timeout = 180000

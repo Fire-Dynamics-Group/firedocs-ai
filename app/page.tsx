@@ -5,17 +5,17 @@ export default function Home() {
   const [query, setQuery] = useState('')
   const [result, setResult] = useState('')
   const [loading, setLoading] = useState(false)
-  async function createIndexAndEmbeddings() {
-    try {
-      const result = await fetch('/api/setup', {
-        method: "POST"
-      })
-      const json = await result.json()
-      console.log('result: ', json)
-    } catch (err) {
-      console.log('err:', err)
-    }
-  }
+  // async function createIndexAndEmbeddings() {
+  //   try {
+  //     const result = await fetch('/api/setup', {
+  //       method: "POST"
+  //     })
+  //     const json = await result.json()
+  //     console.log('result: ', json)
+  //   } catch (err) {
+  //     console.log('err:', err)
+  //   }
+  // }
   async function sendQuery() {
     if (!query) return
     setResult('')
@@ -41,7 +41,7 @@ export default function Home() {
         loading && <p>Asking AI ...</p>
       }
       {
-        result && <p>{result}</p>
+        result && <p>{result}</p> //&& <p>{context}</p>
       }
       { /* consider removing this button from the UI once the embeddings are created ... */}
       {/* <button>Create index and embeddings</button> */}

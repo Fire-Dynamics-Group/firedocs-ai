@@ -13,9 +13,9 @@ export async function POST(req: NextRequest) {
     environment: process.env.PINECONE_ENVIRONMENT || ''
   })
 
-  const text = await queryPineconeVectorStoreAndQueryLLM(client, indexName, body)
+  const [text, context] = await queryPineconeVectorStoreAndQueryLLM(client, indexName, body)
 
   return NextResponse.json({
-    data: text
+    data: text, context
   })
 }
