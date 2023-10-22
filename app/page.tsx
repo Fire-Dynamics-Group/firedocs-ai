@@ -43,7 +43,12 @@ export default function Home() {
         loading && <p>Asking AI ...</p>
       }
       {
-        result && <p>{result}</p> && <p>{context}</p>
+        result && <>
+        <p>{result}</p>
+        <br />
+        Context: 
+        <p>{context}</p>
+        </>
       }
       { /* consider removing this button from the UI once the embeddings are created ... */}
       {/* <button>Create index and embeddings</button> */}
