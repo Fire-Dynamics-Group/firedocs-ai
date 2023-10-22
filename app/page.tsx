@@ -4,6 +4,7 @@ import { useState } from 'react'
 export default function Home() {
   const [query, setQuery] = useState('')
   const [result, setResult] = useState('')
+  const [context, setContext] = useState('')
   const [loading, setLoading] = useState(false)
   // async function createIndexAndEmbeddings() {
   //   try {
@@ -27,6 +28,7 @@ export default function Home() {
       })
       const json = await result.json()
       setResult(json.data)
+      setContext(json.context)
       setLoading(false)
     } catch (err) {
       console.log('err:', err)
@@ -41,7 +43,7 @@ export default function Home() {
         loading && <p>Asking AI ...</p>
       }
       {
-        result && <p>{result}</p> //&& <p>{context}</p>
+        result && <p>{result}</p> && <p>{context}</p>
       }
       { /* consider removing this button from the UI once the embeddings are created ... */}
       {/* <button>Create index and embeddings</button> */}
