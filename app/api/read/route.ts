@@ -13,8 +13,13 @@ export async function POST(req: NextRequest) {
     environment: process.env.PINECONE_ENVIRONMENT || ''
   })
 
-  const [text, context] = await queryPineconeVectorStoreAndQueryLLM(client, indexName, body)
-
+  const result = await queryPineconeVectorStoreAndQueryLLM(client, indexName, body)
+  if (!result) {
+    // Handle the 'undefined' case here, perhaps by returning a default value or throwing an error
+    throw new Error("Received undefined result from queryPineconeVectorStoreAndQueryLLM");
+  }
+  
+  const [text, context] = result; 
   return NextResponse.json({
     data: text, context
   })
